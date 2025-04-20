@@ -52,4 +52,4 @@ Aquí algunos ecommerces que nos inspiran en diseño, contenido, branding y expe
 
 ---
 
-**Glow Up** — Porque cuidar tu piel es el primer paso para brillar 🌸
+**Glow Up** — Cuidar tu piel es el primer paso para brillar 🌸
