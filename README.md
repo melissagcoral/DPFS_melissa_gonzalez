@@ -10,7 +10,7 @@ Un espacio delicado, moderno y acogedor donde la belleza natural se celebra. Ins
 
 ---
 
-## 👩‍🦰 Público objetivo
+## 👩‍🦰👩🏽 Público objetivo
 
 Mujeres de todas las edades interesadas en:
 - El bienestar de su piel.
