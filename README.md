@@ -33,7 +33,7 @@ Aquí algunos ecommerces que nos inspiran en diseño, contenido, branding y expe
 
 ## 🧰 Tecnologías (propuesta)
 
-- **Frontend:** React / Next.js o HTML + Tailwind CSS
+- **Frontend:** React 
 - **Backend:** Node.js con Express 
 - **Base de datos:** 
 - **Diseño:** Figma + Paleta inspirada en colores nude, verde salvia, lavanda
