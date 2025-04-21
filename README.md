@@ -61,6 +61,13 @@ Aquí algunos ecommerces que nos inspiran en diseño, contenido, branding y expe
 
 ---
 
+## 📋 Organización del proyecto
+
+Puedes seguir el avance, tareas y prioridades del equipo en nuestro tablero de Trello:  
+👉 [Acceder al Trello del proyecto](https://trello.com/b/Gskb6Sq4/glowup)
+
+---
+
 ## 🚧 Estado del proyecto
 
 🛠️ En desarrollo — estamos trabajando en la arquitectura, diseño visual y carga inicial de productos.
