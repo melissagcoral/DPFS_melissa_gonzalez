@@ -3,22 +3,32 @@
         <%= title %>
     </h2>
     <form id="productForm" action="/products" method="POST" enctype="multipart/form-data">
-
         <div class="form-group">
             <p class="label-products">Nombre:</p>
-            <input class="form-input" type="text" name="nombre" placeholder="Nombre" id="nombre" required>
+            <input class="form-input" type="text" name="name" placeholder="Nombre" id="name" required>
         </div>
         <div class="form-group">
             <p class="label-products">Precio:</p>
-            <input class="form-input" type="text" name="precio" placeholder="Precio" id="precio" required>
+            <input class="form-input" type="text" name="price" placeholder="Precio" id="price" required>
+        </div>
+        <div class="form-group">
+            <p class="label-products">Categoría:</p>
+            <select class="form-input" name="category_id" id="category_id" required>
+                <option value="">Selecciona una categoría</option>
+                <% if (typeof categories !== 'undefined' && categories.length > 0) { %>
+                    <% categories.forEach(category => { %>
+                        <option value="<%= category.id %>"><%= category.name %></option>
+                    <% }) %>
+                <% } %>
+            </select>
         </div>
         <div class="form-group">
             <p class="label-products">Imagen:</p>
-            <input class="form-input" type="file" name="imagen" placeholder="Imagen" id="imagen" accept="image/*" required>
+            <input class="form-input" type="file" name="image_url" placeholder="Imagen" id="image" accept="image/*" required>
         </div>
         <div class="form-group">
             <p class="label-products">Descripción:</p>
-            <textarea class="form-input" name="descripcion" placeholder="Descripción" id="descripcion"></textarea>
+            <textarea class="form-input" name="description" placeholder="Descripción del producto" id="description"></textarea>
         </div>
         <div class="button-container">
             <a href="/products" class="btn-volver">Volver</a>
