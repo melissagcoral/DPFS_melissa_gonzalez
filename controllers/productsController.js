@@ -1,31 +1,33 @@
-const { v4: uuidv4 } = require('uuid');
+let db = require('../database/models');
 
-let productos = [
-    {
-        id: '6e3879f0-ca68-4b2d-9c5b-2fe6890c071e',
-        nombre: "Crema Facial Hidratante",
-        categoria: "Cuidado Facial",
-        descripcion: "Hidrata y revitaliza tu piel con ingredientes naturales.",
-        precio: "150.000",
-        imagen: "/images/hidratante.jpg"
-    },
-    {
-        id: '2d19ca00-320e-4aae-8551-ee044da26ad5',
-        nombre: "Serum Glow Up",
-        categoria: "Cuidado Facial",
-        descripcion: "Ilumina y unifica el tono de tu piel con nuestro serum estrella.",
-        precio: "250.000",
-        imagen: "/images/serum.jpg"
-    },
-    {
-        id: '0c7d3845-22c9-4a98-a1d3-7cc4f554b175',
-        nombre: "Mascarilla Refrescante",
-        categoria: "Cuidado Facial",
-        descripcion: "Relaja tu piel con extractos botánicos refrescantes.",
-        precio: "50.000",
-        imagen: "/images/mascarilla.jpg"
-    }
-];
+// const { v4: uuidv4 } = require('uuid');
+
+// let productos = [
+//     {
+//         id: '6e3879f0-ca68-4b2d-9c5b-2fe6890c071e',
+//         nombre: "Crema Facial Hidratante",
+//         categoria: "Cuidado Facial",
+//         descripcion: "Hidrata y revitaliza tu piel con ingredientes naturales.",
+//         precio: "150.000",
+//         imagen: "/images/hidratante.jpg"
+//     },
+//     {
+//         id: '2d19ca00-320e-4aae-8551-ee044da26ad5',
+//         nombre: "Serum Glow Up",
+//         categoria: "Cuidado Facial",
+//         descripcion: "Ilumina y unifica el tono de tu piel con nuestro serum estrella.",
+//         precio: "250.000",
+//         imagen: "/images/serum.jpg"
+//     },
+//     {
+//         id: '0c7d3845-22c9-4a98-a1d3-7cc4f554b175',
+//         nombre: "Mascarilla Refrescante",
+//         categoria: "Cuidado Facial",
+//         descripcion: "Relaja tu piel con extractos botánicos refrescantes.",
+//         precio: "50.000",
+//         imagen: "/images/mascarilla.jpg"
+//     }
+// ];
 
 let categorias = [
     { id: '002d4fbc-0535-4c0d-b3f3-f8de711e5178', nombre: 'Cuidado Facial' }, { id: '00a14c55-19ef-4c36-8a4d-51cab3140cc1', nombre: 'Cuidado Corporal' }, { id: '01edde29-9539-4bcb-b94d-568a08a79638', nombre: 'Maquillaje' }, { id: '03ebd516-3ae6-48f7-9a4d-e4c38b7c2ca7', nombre: 'Cuidado del Cabello' }, { id: '040d91c5-2228-464e-b337-5a1ac96c07d0', nombre: 'Fragancias' }
@@ -39,7 +41,16 @@ let user = {
 
 let productsController = {
     index: function (req, res) {
-        res.render('products/index', { title: 'Productos', productos: productos, categorias: categorias, user: user });
+        db.Product.findAll()
+        .then(function (data) {
+            //return res.send(data);
+            let productosList = data;
+            return res.render('products/index', { title: 'Productos', productos: productosList, categorias: categorias, user: user });
+        }).catch(function (error) {
+            console.log(error); 
+            //return res.send(error)
+            //res.render('products/index', { title: 'Productos', productos: productos, categorias: categorias, user: user });
+        })
     },
     create: function (req, res) {
         res.render('products/new', { title: 'Nuevo producto' });

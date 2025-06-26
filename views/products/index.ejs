@@ -44,15 +44,15 @@
                 <% productos.forEach(function(producto) { %>
                     <div class="producto-card">
                         <a href="/products/<%= producto.id %>">
-                            <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>" class="producto-img">
+                            <img src="<%= producto.image_url %>" alt="<%= producto.name %>" class="producto-img">
                         </a>
                         <h3 class="producto-nombre">
-                            <%= producto.nombre %>
+                            <%= producto.name %>
                         </h3>
                         <p class="producto-descripcion">
-                            <%= producto.descripcion %>
+                            <%= producto.description %>
                         </p>
-                        <p class="producto-precio">₲<%= producto.precio %>
+                        <p class="producto-precio">₲<%= Number(producto.price).toLocaleString('es-PY') %>
                         </p>
                         <div class="button-container-products">
                             <button class="add-to-cart" data-id="<%= producto.id %>">Agregar al carrito</button>
