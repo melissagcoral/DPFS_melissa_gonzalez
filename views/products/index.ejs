@@ -1,0 +1,75 @@
+<div class="product-list">
+    <h2 class="title-h2">
+        <%= title %>
+    </h2>
+    <p>Descubre nuestra selección de productos de cuidado personal.</p>
+
+    <div class="filter-options">
+        <label for="category">Categoría:</label>
+        <select id="category" name="category">
+            <option value="">Todas</option>
+            <% categorias.forEach(function(categoria) { %>
+                <option value="<%= categoria.nombre %>">
+                    <%= categoria.nombre %>
+                </option>
+                <% }) %>
+        </select>
+
+        <label for="price">Precio:</label>
+        <select id="price" name="price">
+            <option value="">Todos</option>
+            <option value="low">Bajo a Alto</option>
+            <option value="high">Alto a Bajo</option>
+        </select>
+
+        <label for="search">Buscar:</label>
+        <input type="text" id="search" name="search" placeholder="Buscar productos">
+    </div>
+
+    <div class="sort-options">
+        <label for="sort">Ordenar por:</label>
+        <select id="sort" name="sort">
+            <option value="name">Nombre</option>
+            <option value="price">Precio</option>
+        </select>
+    </div>
+
+    <% if (user && user.role==='admin' ) { %>
+        <div class="admin-actions">
+            <a href="/products/new" class="btn btn-add-product">Agregar Producto</a>
+        </div>
+        <% } %>
+
+            <div class="productos-grid">
+                <% productos.forEach(function(producto) { %>
+                    <div class="producto-card">
+                        <a href="/products/<%= producto.id %>">
+                            <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>" class="producto-img">
+                        </a>
+                        <h3 class="producto-nombre">
+                            <%= producto.nombre %>
+                        </h3>
+                        <p class="producto-descripcion">
+                            <%= producto.descripcion %>
+                        </p>
+                        <p class="producto-precio">₲<%= producto.precio %>
+                        </p>
+                        <div class="button-container-products">
+                            <button class="add-to-cart" data-id="<%= producto.id %>">Agregar al carrito</button>
+
+                            <% if (user && user.role==='admin' ) { %>
+                                <div class="admin-controls">
+                                    <a href="/products/<%= producto.id %>/edit" class="btn btn-edit">Editar</a>
+                                    <form action="/products/<%= producto.id %>?_method=DELETE" method="POST">
+                                        <button type="submit" class="btn btn-delete">Eliminar</button>
+                                    </form>
+                                </div>
+                                <% } %>
+                        </div>
+
+                    </div>
+                    <% }) %>
+            </div>
+</div>
+
+<script src="/js/cart.js"></script>

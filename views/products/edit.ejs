@@ -1,0 +1,33 @@
+<div class="form-container">
+    <h2 class="title-h2">
+        <%= title %>
+    </h2>
+    <form id="productForm" action="/products/<%= producto.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<%= producto.id %>">
+
+        <div class="form-group">
+            <p class="label-products">Nombre:</p>
+            <input class="form-input" type="text" id="nombre" placeholder="Nombre" id="nombre" value="<%= producto.nombre %>">
+        </div>
+        <div class="form-group">
+            <p class="label-products">Precio:</p>
+            <input class="form-input" type="text" id="precio" placeholder="Precio" id="precio" value="<%= producto.precio %>">
+        </div>
+        <div class="form-group">
+            <p class="label-products">Imagen:</p>
+            <input class="form-input" type="file" name="imagen" placeholder="Imagen" id="imagen" accept="image/*" value="<%= producto.imagen %>">
+        </div>
+        <div class="form-group">
+            <p class="label-products">Descripción:</p>
+            <textarea class="form-input" id="descripcion" placeholder="Descripción"
+                id="descripcion"><%= producto.descripcion %></textarea>
+        </div>
+
+        <div class="button-container">
+            <a href="/products" class="btn-volver">Volver</a>
+            <button type="submit" class="btn-guardar">Guardar</button>
+        </div>
+    </form>
+</div>
+
+<script src="/js/cart.js"></script>

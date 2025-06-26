@@ -1,0 +1,43 @@
+<section class="product-detail" id="product-detail">
+    <div class="detail-container">
+        <div class="image-gallery">
+            <img src="<%= product.imagen %>" alt="<%= product.nombre %>" class="main-image" />
+            <!-- Miniaturas si tuvieras varias imágenes -->
+            <div class="thumbnail-images">
+                <img src="<%= product.imagen %>" alt="Miniatura 1" />
+                <img src="<%= product.imagen %>" alt="Miniatura 2" />
+            </div>
+        </div>
+
+        <div id="product-info" data-id="<%= product.id %>" data-imagen="<%= product.imagen %>">
+            <h1 class="product-title">
+                <%= product.nombre %>
+            </h1>
+            <p class="product-price">Gs. <%= product.precio %>
+            </p>
+
+            <label for="quantity">Cantidad:</label>
+            <select id="quantity" name="quantity">
+                <% for (let i=1; i <=10; i++) { %>
+                    <option value="<%= i %>">
+                        <%= i %>
+                    </option>
+                    <% } %>
+            </select>
+
+            <div class="buttons">
+                <button class="add-to-cart">Agregar al carrito</button>
+                <button class="btn-buy">Comprar ahora</button>
+            </div>
+
+            <div class="description-section">
+                <h3>Descripción</h3>
+                <p>
+                    <%= product.descripcion %>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="/js/cart.js"></script>

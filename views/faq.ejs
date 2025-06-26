@@ -1,0 +1,45 @@
+<main class="faq-container">
+    <h2>
+        <%= title %>
+    </h2>
+
+    <div class="faq">
+        <div class="question" onclick="toggleAnswer(this)">
+            ¿Cómo puedo registrarme?
+            <span class="icon">+</span>
+        </div>
+        <div class="answer">
+            Para registrarte, haz clic en el botón “Registrarse” en la parte superior derecha y completa el formulario.
+        </div>
+    </div>
+
+    <div class="faq">
+        <div class="question" onclick="toggleAnswer(this)">
+            ¿Puedo editar mis datos personales?
+            <span class="icon">+</span>
+        </div>
+        <div class="answer">
+            Sí, una vez que inicias sesión, ve a tu perfil y haz clic en "Editar".
+        </div>
+    </div>
+
+    <div class="faq">
+        <div class="question" onclick="toggleAnswer(this)">
+            ¿Cómo contacto con soporte?
+            <span class="icon">+</span>
+        </div>
+        <div class="answer">
+            Puedes escribirnos a contacto@glowuppy.com o contactarnos a traves de nuestras redes sociales.
+        </div>
+    </div>
+
+</main>
+
+<script>
+    function toggleAnswer(element) {
+        const answer = element.nextElementSibling;
+        const icon = element.querySelector('.icon');
+        answer.classList.toggle('show');
+        icon.textContent = answer.classList.contains('show') ? '−' : '+';
+    }
+</script>
