@@ -1,7 +1,7 @@
 module.exports = {
   "development": {
     "username": "postgres",
-    "password": "S1lence01.",
+    "password": "",
     "database": "glowup_db",
     "host": "127.0.0.1",
     "dialect": "postgres"
