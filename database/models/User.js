@@ -35,6 +35,11 @@ module.exports = function (sequelize, dataTypes) {
         updated_at: {
             type: dataTypes.DATE,
             allowNull: true
+        },
+        type: {
+            type: dataTypes.STRING,
+            allowNull: false,
+            defaultValue: 'Usuario'
         }
     };
     

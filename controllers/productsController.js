@@ -1,103 +1,312 @@
 let db = require('../database/models');
-
-// const { v4: uuidv4 } = require('uuid');
-
-// let productos = [
-//     {
-//         id: '6e3879f0-ca68-4b2d-9c5b-2fe6890c071e',
-//         nombre: "Crema Facial Hidratante",
-//         categoria: "Cuidado Facial",
-//         descripcion: "Hidrata y revitaliza tu piel con ingredientes naturales.",
-//         precio: "150.000",
-//         imagen: "/images/hidratante.jpg"
-//     },
-//     {
-//         id: '2d19ca00-320e-4aae-8551-ee044da26ad5',
-//         nombre: "Serum Glow Up",
-//         categoria: "Cuidado Facial",
-//         descripcion: "Ilumina y unifica el tono de tu piel con nuestro serum estrella.",
-//         precio: "250.000",
-//         imagen: "/images/serum.jpg"
-//     },
-//     {
-//         id: '0c7d3845-22c9-4a98-a1d3-7cc4f554b175',
-//         nombre: "Mascarilla Refrescante",
-//         categoria: "Cuidado Facial",
-//         descripcion: "Relaja tu piel con extractos botánicos refrescantes.",
-//         precio: "50.000",
-//         imagen: "/images/mascarilla.jpg"
-//     }
-// ];
-
-let categorias = [
-    { id: '002d4fbc-0535-4c0d-b3f3-f8de711e5178', nombre: 'Cuidado Facial' }, { id: '00a14c55-19ef-4c36-8a4d-51cab3140cc1', nombre: 'Cuidado Corporal' }, { id: '01edde29-9539-4bcb-b94d-568a08a79638', nombre: 'Maquillaje' }, { id: '03ebd516-3ae6-48f7-9a4d-e4c38b7c2ca7', nombre: 'Cuidado del Cabello' }, { id: '040d91c5-2228-464e-b337-5a1ac96c07d0', nombre: 'Fragancias' }
-];
-
-let user = {
-    nombre: 'Meli',
-    email: '',
-    role: 'admin',
-};
+const { Op } = require('sequelize');
 
 let productsController = {
-    index: function (req, res) {
-        db.Product.findAll()
-        .then(function (data) {
-            //return res.send(data);
-            let productosList = data;
-            return res.render('products/index', { title: 'Productos', productos: productosList, categorias: categorias, user: user });
-        }).catch(function (error) {
-            console.log(error); 
-            //return res.send(error)
-            //res.render('products/index', { title: 'Productos', productos: productos, categorias: categorias, user: user });
-        })
-    },
-    create: function (req, res) {
-        res.render('products/new', { title: 'Nuevo producto' });
-    },
-    detail: function (req, res) {
-        const product = productos.find(p => p.id == req.params.id);
-        console.log(req.params.id);
-        console.log(product);
-
-        if (!product) return res.status(404).render('error', { mensaje: 'Producto no encontrado' });
-        //if (!product) return res.status(404).send('Producto no encontrado');
-        res.render('products/detail', { product: product, /*title: product.nombre*/ });
-    },
-    store: function (req, res) {
-        const { nombre, precio, imagen, descripcion } = req.body;
-
-        if (!nombre || !precio || !imagen || !descripcion) {
-            return res.status(400).send('Todos los campos son obligatorios');
+    index(req, res) {
+        if (req.query.search || req.query.category || req.query.price || req.query.sort) {
+            return this.search(req, res);
         }
 
-        const id = uuidv4(); // Generar un ID único para el nuevo producto
-        productos.push({ id, nombre, descripcion, precio, imagen });
-        res.redirect('/products');
+        Promise.all([
+            db.Product.findAll({
+                include: [
+                    {
+                        model: db.ProductCategory,
+                        as: 'productCategory'
+                    }
+                ],
+                order: [['name', 'ASC']]
+            }),
+            db.ProductCategory.findAll(),
+            db.User.findByPk(1)
+        ])
+            .then(function ([productos, categorias, usuario]) {
+                return res.render('products/index', {
+                    title: 'Todos los productos',
+                    productos: productos || [], 
+                    categorias: categorias || [], 
+                    user: usuario || null
+                });
+            })
+            .catch(function (error) {
+                console.log('Error al cargar productos:', error);
+                return res.render('products/index', {
+                    title: 'Error al cargar productos',
+                    productos: [],
+                    categorias: [],
+                    user: usuario || null,
+                    error: 'No se pudieron cargar los productos'
+                });
+            });
     },
-    search: function (req, res) {
-        let searchTerm = req.query.search
-        return res.render('products/index', { title: 'Resultados de búsqueda', searchTerm })
+    create(req, res) {
+        Promise.all([
+            db.ProductCategory.findAll(),
+        ])
+            .then(function ([categorias]) {
+                return res.render('products/new', {
+                    title: 'Nuevo producto',
+                    categories: categorias,
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     },
-    edit: function (req, res) {
-        const producto = productos.find(p => p.id == req.params.id);
-        //if (!product) return res.status(404).send('Producto no encontrado');
-        res.render('products/edit', { title: 'Editar producto', producto });
+    detail(req, res) {
+        Promise.all([
+            db.Product.findByPk(req.params.id, {
+                include: [{ association: 'productCategory' }]
+            })
+        ])
+            .then(function ([producto]) {
+                res.render('products/detail', { product: producto, title: 'Detalle del producto' });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     },
-    save: function (req, res) {
-        const { id, nombre, precio, imagen, descripcion } = req.body;
-        const productIndex = productos.findIndex(p => p.id == id);
-        //if (productIndex === -1) return res.status(404).send('Producto no encontrado');
+    store(req, res) {
+        try {
+            const { name, price, description, category_id } = req.body;
 
-        productos[productIndex] = { id, nombre, precio, imagen, descripcion };
-        res.redirect('/products');
-    },
-    delete: function (req, res) {
-        const productIndex = productos.findIndex(p => p.id == req.params.id);
-        //if (productIndex === -1) return res.status(404).send('Producto no encontrado');
+            if (!name || !price || !category_id) {
+                return res.status(400).send('Los campos nombre, precio y categoría son obligatorios');
+            }
 
-        productos.splice(productIndex, 1);
-        res.redirect('/products');
+            if (!req.file) {
+                return res.status(400).json({
+                    error: 'La imagen es obligatoria'
+                });
+            }
+
+            let producto = {
+                name: name,
+                price: parseFloat(price),
+                image_url: "/images/products/" + req.file.filename,
+                description: description || '',
+                image_alt: name || '',
+                thumbnail_url: "/images/products/thumbnails/" + req.file.filename,//TODO: MINIMIZAR IMAGEN ANTES DE GUARDAR EN THUMBNAILS
+                category: parseInt(category_id)
+            }
+
+            db.Product.create(producto)
+                .then(function (newProduct) {
+                    res.redirect('/products?success=Producto creado exitosamente');
+                })
+                .catch(function (e) {
+                    console.error('Error al crear producto:', e);
+                    res.status(500).json({
+                        error: 'Error al crear el producto',
+                        details: error.message
+                    });
+                })
+        } catch (error) {
+            console.error('Error en store:', error);
+            res.status(500).json({
+                error: 'Error interno del servidor'
+            });
+        }
+    },
+    search(req, res) {//todo: aplicar css a los filtros
+        const { search, category, price, sort } = req.query;
+        let whereConditions = {};
+        let orderConditions = [];
+
+        if (search && search.trim() !== '') {
+            const searchTerm = search.trim();
+
+            // Para PostgreSQL, usar iLike es más eficiente
+            whereConditions[Op.or] = [
+                {
+                    name: {
+                        [Op.iLike]: `%${searchTerm}%`
+                    }
+                },
+                {
+                    description: {
+                        [Op.iLike]: `%${searchTerm}%`
+                    }
+                }
+            ];
+        }
+
+        //por categoria
+        let includeConditions = [
+            {
+                model: db.ProductCategory,
+                as: 'productCategory'
+            }
+        ];
+
+        if (category && category !== '') {
+            includeConditions[0].where = {
+                name: category
+            };
+        }
+
+        //order
+        switch (sort) {
+            case 'name':
+                orderConditions = [['name', 'ASC']];
+                break;
+            case 'price':
+                if (price === 'high') {
+                    orderConditions = [['price', 'DESC']];
+                } else {
+                    orderConditions = [['price', 'ASC']];
+                }
+                break;
+            case 'newest':
+                orderConditions = [['created_at', 'DESC']];
+                break;
+            default:
+                orderConditions = [['name', 'ASC']];
+        }
+
+        // si no hay ordenamiento por precio pero hay filtro de precio
+        if (price && sort !== 'price') {
+            if (price === 'high') {
+                orderConditions = [['price', 'DESC']];
+            } else if (price === 'low') {
+                orderConditions = [['price', 'ASC']];
+            }
+        }
+
+        Promise.all([
+            db.Product.findAll({
+                where: whereConditions,
+                include: includeConditions,
+                order: orderConditions
+            }),
+            db.ProductCategory.findAll(),
+            db.User.findByPk(1)
+        ])
+            .then(function ([productos, categorias, usuario]) {
+                // Construir título dinámico
+                let title = 'Productos';
+                if (search) title = `Resultados de búsqueda`;
+                if (category) title += ` - Categoría: ${category}`;
+
+                return res.render('products/index', {
+                    title: title,
+                    productos: productos || [], // Asegurar que siempre sea un array
+                    categorias: categorias || [], // Asegurar que siempre sea un array
+                    searchTerm: search || '',
+                    selectedCategory: category || '',
+                    priceFilter: price || '',
+                    sortBy: sort || 'name',
+                    user: usuario || req.session.user || null
+                });
+            })
+            .catch(function (error) {
+                console.log('Error en búsqueda/filtrado:', error);
+                // En caso de error, cargar solo las categorías y productos vacíos
+                db.ProductCategory.findAll(),
+                    db.User.findByPk(1)
+                        .then(function (categorias, usuario) {
+                            return res.render('products/index', {
+                                title: 'Error en la búsqueda',
+                                productos: [], // Array vacío en caso de error
+                                categorias: categorias || [],
+                                searchTerm: search || '',
+                                selectedCategory: category || '',
+                                priceFilter: price || '',
+                                sortBy: sort || 'name',
+                                user: usuario || req.session.user || null,
+                                error: 'Error en la búsqueda'
+                            });
+                        })
+                        .catch(function (err) {
+                            // Si hasta las categorías fallan
+                            return res.render('products/index', {
+                                title: 'Error del sistema',
+                                productos: [],
+                                categorias: [],
+                                user: null,
+                                error: 'Error del sistema'
+                            });
+                        });
+            });
+
+    },
+    edit(req, res) {
+        Promise.all([
+            db.Product.findByPk(req.params.id),
+            db.ProductCategory.findAll(),
+        ])
+            .then(function ([producto, categorias]) {
+                //if (!producto) return res.status(404).send('Producto no encontrado');
+                if (!producto) return res.status(404).render('error', { mensaje: 'Producto no encontrado' });
+                return res.render('products/edit', {
+                    title: 'Editar producto',
+                    product: producto,
+                    categories: categorias
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+                res.status(500).send('Error al cargar el producto');
+            });
+    },
+    save(req, res) {
+        try {
+            const productId = req.params.id;
+            const { name, price, description, category_id } = req.body;
+
+            // Buscar el producto existente
+            db.Product.findByPk(productId)
+                .then(function (product) {
+                    if (!product) {
+                        return res.status(404).json({
+                            error: 'Producto no encontrado'
+                        });
+                    }
+
+                    // Preparar datos
+                    let updateData = {
+                        name: name,
+                        price: parseFloat(price),
+                        description: description || '',
+                        category_id: parseInt(category_id)
+                    };
+
+                    // Si se subió una nueva imagen, actualizar también la imagen
+                    if (req.file) {
+                        updateData.image_url = req.file.filename;
+                    }
+
+                    // Actualizar el producto
+                    return product.update(updateData);
+                })
+                .then(function (updatedProduct) {
+                    // Redirigir con mensaje de éxito
+                    res.redirect('/products?success=Producto actualizado exitosamente');
+                })
+                .catch(function (error) {
+                    console.error('Error al actualizar producto:', error);
+                    res.status(500).json({
+                        error: 'Error al actualizar el producto',
+                        details: error.message
+                    });
+                });
+
+        } catch (error) {
+            console.error('Error en save:', error);
+            res.status(500).json({
+                error: 'Error interno del servidor'
+            });
+        }
+    },
+    delete(req, res) {
+        db.Product.destroy({
+            where: { id: req.params.id }
+        }).then(function () {
+            return res.redirect('/products?success=Producto eliminado exitosamente')
+        })
+            .catch(function (e) {
+                console.log(e);
+            })
     }
 }
 

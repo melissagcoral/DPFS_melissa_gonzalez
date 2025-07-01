@@ -23,3 +23,5 @@ build/
 # IDEs
 .vscode/
 .idea/
+
+database/config/config.json

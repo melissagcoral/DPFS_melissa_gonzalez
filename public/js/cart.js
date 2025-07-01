@@ -13,14 +13,26 @@ function showToast(mensaje) {
   }, 3000); // 3 segundos
 }
 
+function checkSuccessMessage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const successMessage = urlParams.get('success');
+    
+    if (successMessage) {
+        showToast(successMessage);
+        // Limpiar la URL sin recargar la página
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', checkSuccessMessage);
 
 document.addEventListener('DOMContentLoaded', () => {
+  checkSuccessMessage();
   renderCarrito();
   setupAddToCartButtonsFromDetail();
   setupAddToCartButtons();
   setupBuyNowButton();
   setupFormSubmission();
-  //btnEditarOnClick();
 });
 
 // ----------------------
@@ -82,7 +94,6 @@ function setupAddToCartButtonsFromDetail() {
     alert(`${nombre} agregado al carrito`);
   });
 }
-
 
 // ----------------------
 // Renderiza productos del carrito en cart.ejs
@@ -162,27 +173,75 @@ function setupBuyNowButton() {
 }
 
 // ----------------------
-// Guardar producto desde form (admin/new product)
+// Guardar producto desde form 
 // ----------------------
 function setupFormSubmission() {
   const form = document.getElementById("productForm");
   if (!form) return;
 
   form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    const product = {
-      id: Date.now().toString(),
-      nombre: form.nombre.value,
-      precio: parseInt(form.precio.value.replace(/[^\d]/g, '')),
-      imagen: form.imagen.value,
-      descripcion: form.descripcion.value
-    };
+    // detectar si es formulario de edicion o nuevo producto
+    const isEditForm = form.getAttribute('name') === 'edit-product';
+    const isNewForm = form.getAttribute('name') === 'new-product';
 
-    let products = JSON.parse(localStorage.getItem("products")) || [];
-    products.push(product);
-    localStorage.setItem("products", JSON.stringify(products));
-    alert("Producto guardado");
-    form.reset();
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const nameInput = form.querySelector('input[name="name"]');
+    const priceInput = form.querySelector('input[name="price"]');
+    const categorySelect = form.querySelector('select[name="category"]');
+    const imageInput = form.querySelector('input[name="image_url"]');
+
+    // validaciones basicas del lado del cliente
+    if (!nameInput?.value.trim()) {
+      e.preventDefault();
+      showToast('El nombre del producto es obligatorio');
+      nameInput?.focus();
+      return;
+    }
+
+    if (!priceInput?.value.trim()) {
+      e.preventDefault();
+      showToast('El precio del producto es obligatorio');
+      priceInput?.focus();
+      return;
+    }
+
+    if (!categorySelect?.value) {
+      e.preventDefault();
+      showToast('Debe seleccionar una categoría');
+      categorySelect?.focus();
+      return;
+    }
+
+    if (isNewForm) {
+      if (!imageInput?.files?.length) {
+        e.preventDefault();
+        showToast('Debe seleccionar una imagen');
+        imageInput?.focus();
+        return;
+      }
+    }
+
+    if (isEditForm) {
+      console.log('Actualizando producto...');
+    }
+
+    if (submitBtn) {
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = isEditForm ? 'Actualizando...' : 'Guardando...';
+      submitBtn.disabled = true;
+
+      // prevenir múltiples envios
+      form.style.pointerEvents = 'none';
+
+      // Opcional: restaurar el estado si hay algún error (esto es por si falla la validación del servidor)
+      setTimeout(() => {
+        if (submitBtn.disabled) {
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+          form.style.pointerEvents = 'auto';
+        }
+      }, 10000);
+    }
   });
 }
 
