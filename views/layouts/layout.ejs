@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+  <%- include('../partials/head') %>
+
+  <div id="toast-container"></div>
+
+  <body>
+    <header>
+      <%- include('../partials/menu') %>
+    </header>
+
+    <main>
+      <!-- Aquí se inyecta el contenido de cada vista -->
+      <%- body %>
+    </main>
+
+    <%- include('../partials/footer') %>
+  </body>
+</html>

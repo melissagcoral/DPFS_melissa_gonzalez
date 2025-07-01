@@ -44,11 +44,8 @@ Aquí algunos ecommerces que nos inspiran en diseño, contenido, branding y expe
 
 ### Tipografía
 
-- **Titulares / Marca: `Quicksand`**  
+- **Titulares / Marca / Textos / Interfaz: `Quicksand`**  
   Tipografía sans-serif redondeada, moderna y amigable. Transmite cercanía, suavidad y confianza, ideal para marcas con una estética suave y femenina. Perfecta para títulos, encabezados y elementos destacados donde se busca un impacto visual cálido pero profesional.
-
-- **Textos / Interfaz: `Montserrat`**  
-  Sans-serif geométrica y elegante. Muy legible en distintos tamaños y dispositivos. Aporta equilibrio visual, profesionalismo y claridad a los textos del sitio como descripciones de productos, botones y formularios.
 
 ---
 
@@ -56,7 +53,7 @@ Aquí algunos ecommerces que nos inspiran en diseño, contenido, branding y expe
 
 - **Frontend:** React 
 - **Backend:** Node.js con Express 
-- **Base de datos:** *Por definir (ej: PostgreSQL )*
+- **Base de datos:** PostgreSQL
 - **Diseño:** Figma + Paleta inspirada en colores nude, verde salvia, gris calido
 
 ---
@@ -71,6 +68,8 @@ Puedes seguir el avance, tareas y prioridades del equipo en nuestro tablero de T
 ## 🚧 Estado del proyecto
 
 🛠️ En desarrollo — estamos trabajando en la arquitectura, diseño visual y carga inicial de productos.
+
+01/07/2025: Cerrando el CRUD de Productos.
 
 ---
 
