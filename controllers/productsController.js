@@ -108,7 +108,7 @@ let productsController = {
             });
         }
     },
-    search(req, res) {//todo: aplicar css a los filtros
+    search(req, res) {
         const { search, category, price, sort } = req.query;
         let whereConditions = {};
         let orderConditions = [];
