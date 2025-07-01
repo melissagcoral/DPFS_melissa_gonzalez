@@ -68,6 +68,7 @@ Puedes seguir el avance, tareas y prioridades del equipo en nuestro tablero de T
 ## 🚧 Estado del proyecto
 
 🛠️ En desarrollo — estamos trabajando en la arquitectura, diseño visual y carga inicial de productos.
+
 01/07/2025: Cerrando el CRUD de Productos.
 
 ---
