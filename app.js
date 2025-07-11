@@ -5,8 +5,15 @@ const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 const createError = require('http-errors');
 const expressLayouts = require('express-ejs-layouts');
+const session = require("express-session");
+const port = process.env.PORT || 3002;
+
+const sessionMiddleware = require("./middlewares/sessionMiddleware");
+const sessionTimeMiddleware = require("./middlewares/sessionTimeMiddleware");
 
 const app = express();
+
+require("dotenv").config();
 
 // Configuracion de EJS y Layouts
 app.set('views', path.join(__dirname, 'views'));
@@ -25,6 +32,13 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
+app.use(
+  session({ secret: "es un secreto", resave: false, saveUninitialized: true })
+);
+
+// esto es un middleware de tiempo de session
+app.use(sessionMiddleware);
+app.use(sessionTimeMiddleware);
 
 // Rutas
 const indexRouter = require('./routes/index');
@@ -32,21 +46,15 @@ const usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', usersRouter);
 app.use('/products', productsRouter);
 
-// Rutas auxiliares (login, logout, register)
-app.get('/login', (req, res) => {
-  res.render('users/login', { title: 'Login' });
-});
-
-app.get('/logout', (req, res) => {
-  // req.session.destroy()
-  res.redirect('/login?logout=1');
-});
-
-app.get('/register', (req, res) => {
-  res.render('users/register', { title: 'Registro' });
+app.use((req, res, next) => {
+    console.log(`🔍 ${req.method} ${req.url}`);
+    if (req.method === 'POST') {
+        console.log('📦 POST Body:', req.body);
+    }
+    next();
 });
 
 // catch 404 and forward to error handler
@@ -63,6 +71,10 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error', { mensaje: err.message });
+});
+
+app.listen(port, () => {
+    console.log(`Servidor escuchando en http://localhost:${port}`);
 });
 
 module.exports = app;

@@ -61,8 +61,8 @@
 
         <!-- Botones de acción -->
         <div class="form-actions">
-            <button type="submit" class="btn btn-search"><i class="fa fa-filter" aria-hidden="true" title="Buscar" style="margin-right: 5px;"></i>Aplicar filtros</button>
-            <a href="/products" class="btn btn-reset"><i class="fa fa-eraser" aria-hidden="true" style="margin-right: 5px;"></i>Limpiar filtros</a>
+            <button type="submit" class="btn-filter"><i class="fa fa-filter" aria-hidden="true" title="Buscar" style="margin-right: 5px;"></i>Aplicar filtros</button>
+            <a href="/products" class="btn-clear"><i class="fa fa-refresh" aria-hidden="true" style="margin-right: 5px;"></i>Limpiar filtros</a>
         </div>
     </form>
 
@@ -86,7 +86,7 @@
     <% if (productos.length === 0) { %>
         <div class="no-results">
             <p>No se encontraron productos con los criterios seleccionados.</p>
-            <a href="/products" class="btn btn-add-product">Ver todos los productos</a>
+            <a href="/products" class="btn btn-info">Ver todos los productos</a>
         </div>
     <% } else { %>
         <div class="results-count">
@@ -96,7 +96,7 @@
 
     <% if (user && user.type === 'Administrador') { %>
         <div class="admin-actions">
-            <a href="/products/new" class="btn btn-add-product">Agregar Producto</a>
+            <a href="/products/new" class="btn btn-info">Agregar Producto</a>
         </div>
     <% } %>
 
@@ -115,13 +115,13 @@
                 <p class="producto-precio">₲<%= Number(producto.price).toLocaleString('es-PY') %>
                 </p>
                 <div class="button-container-products">
-                    <button class="add-to-cart" data-id="<%= producto.id %>">Agregar al carrito</button>
+                    <button class="btn-info add-to-cart" data-id="<%= producto.id %>">Agregar al carrito</button>
 
                     <% if (user && user.type === 'Administrador') { %>
                         <div class="admin-controls">
-                            <a href="/products/<%= producto.id %>/edit" class="btn btn-edit">Editar</a>
+                            <a href="/products/<%= producto.id %>/edit" class="btn btn-info">Editar</a>
                             <form action="/products/<%= producto.id %>?_method=DELETE" method="POST">
-                                <button type="submit" class="btn btn-delete">Eliminar</button>
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
                             </form>
                         </div>
                     <% } %>

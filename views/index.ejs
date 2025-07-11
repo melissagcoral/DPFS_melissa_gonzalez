@@ -23,14 +23,15 @@
 <section class="productos-grid" id="productos">
   <% productos.forEach(function(producto) { %>
     <div class="producto-card">
-      <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>" class="producto-img">
+      <!-- <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>" class="producto-img"> -->
+      <img src="/images/<%= producto.name.toLowerCase() %>.jpg" alt="<%= producto.name %>" class="producto-img">
       <h3 class="producto-nombre">
-        <%= producto.nombre %>
+        <%= producto.name %>
       </h3>
       <p class="producto-descripcion">
-        <%= producto.descripcion %>
+        <%= producto.description %>
       </p>
-      <button class="btn-vermas">Ver más</button>
+      <button class="btn-info btn-vermas">Ver más</button>
     </div>
     <% }); %>
 </section>

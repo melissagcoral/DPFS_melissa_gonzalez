@@ -1,23 +1,46 @@
-<section class="register-container">
-    <h2>Crear cuenta</h2>
-    <form id="registerForm">
-      <label for="name">Nombre completo:</label>
-      <input type="text" id="name" name="name" required>
-  
-      <label for="email">Correo electrónico:</label>
-      <input type="email" id="email" name="email" required>
-  
-      <label for="password">Contraseña:</label>
-      <input type="password" id="password" name="password" required minlength="6">
-  
-      <label for="confirmPassword">Confirmar contraseña:</label>
-      <input type="password" id="confirmPassword" name="confirmPassword" required>
-  
-      <button type="submit">Registrarse</button>
-      <p id="registerError" class="error-message"></p>
-      <p id="registerSuccess" class="success-message"></p>
-    </form>
-  </section>
-  
-  <script src="/js/register.js"></script>
-  
+<section class="sml-container">
+  <h2 class="title-h2">
+    <%=title%>
+  </h2>
+  <form id="registerForm" action="/register" method="POST">
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" name="name" value="<%= locals.olds && olds.name ? olds.name : '' %>">
+    <% if (locals.errors && errors.name) { %>
+      <span>
+        <%= errors.name.msg %>
+      </span>
+      <% } %>
+
+    <label for="lastname">Apellido:</label>
+    <input type="text" id="lastname" name="lastname" value="<%= locals.olds && olds.lastname ? olds.lastname : '' %>">
+      <% if (locals.errors && errors.lastname) { %>
+      <span>
+        <%= errors.lastname.msg %>
+      </span>
+      <% } %>
+
+    <label for="email">Correo electrónico:</label>
+    <input type="email" id="email" name="email" value="<%= locals.olds && olds.email ? olds.email : '' %>">
+    <% if (locals.errors && errors.email) { %>
+      <span>
+        <%= errors.email.msg %>
+      </span>
+      <% } %>
+
+
+    <label for="password">Contraseña:</label>
+    <input type="password" id="password" name="password" required minlength="6">
+    <% if (locals.errors && errors.password) { %>
+      <span>
+        <%= errors.password.msg %>
+      </span>
+      <% } %>
+
+    <label for="confirmPassword">Confirmar contraseña:</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+    <button type="submit">Registrarse</button>
+    <p id="registerError" class="error-message"></p>
+    <p id="registerSuccess" class="success-message"></p>
+  </form>
+</section>

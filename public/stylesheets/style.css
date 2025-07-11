@@ -173,15 +173,8 @@ nav ul li a:hover {
 .btn-vermas {
   margin-top: 15px;
   padding: 10px 20px;
-  background-color: #B4C1A1;
   /* verde salvia */
-  color: white;
-  border: none;
-  border-radius: 25px;
-  font-weight: bold;
-  cursor: pointer;
   transition: background-color 0.3s;
-  font-family: 'Quicksand', sans-serif;
 }
 
 .btn-vermas:hover {
@@ -322,31 +315,6 @@ nav ul li a:hover {
   margin-top: 20px;
 }
 
-.about {
-  max-width: 800px;
-  margin: 3rem auto;
-  padding: 2rem;
-  background-color: #FDFDF9;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.about-container {
-  font-family: 'Quicksand', sans-serif;
-  line-height: 1.2;
-}
-
-.about-h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.about-p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-
 .btn-contact {
   margin-top: 15px;
   padding: 10px 20px;
@@ -367,91 +335,53 @@ nav ul li a:hover {
   /* verde salvia más oscuro */
 }
 
-/*LOGIN*/
-.login-container {
+/*LOGIN Y REGISTER*/
+.sml-container {
   max-width: 400px;
   margin: 3rem auto;
-  background: #fff;
+  background: #FDFDF9;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   font-family: 'Quicksand', sans-serif;
 }
 
-.login-container h2 {
+.sml-container h2 {
   text-align: center;
   margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
-.login-container label {
+.sml-container label {
   display: block;
   margin-top: 1rem;
 }
 
-.login-container input {
+.sml-container input[type="email"],
+input[type="password"],
+input[type="text"] {
   width: 90%;
   padding: 0.6rem;
   margin-top: 0.3rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-}
-
-.login-container button {
-  width: 100%;
-  padding: 0.8rem;
-  margin-top: 1.5rem;
-  background-color: #9DAE8C;
-  font-family: 'Quicksand', sans-serif;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.login-container .error-message {
-  color: red;
-  margin-top: 1rem;
-  text-align: center;
-}
-
-.success-message {
-  color: green;
-  margin-top: 1rem;
-  text-align: center;
-}
-
-.register-container {
-  max-width: 400px;
-  margin: 3rem auto;
-  background: #fff;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease;
   font-family: 'Quicksand', sans-serif;
 }
 
-.register-container h2 {
-  text-align: center;
-  margin-bottom: 1.5rem;
+.sml-container input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus {
+  outline: none;
+  border: 2px solid #9DAE8C;
 }
 
-.register-container label {
-  display: block;
-  margin-top: 1rem;
-}
-
-.register-container input {
-  width: 90%;
-  padding: 0.6rem;
-  margin-top: 0.3rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.register-container button {
-  width: 100%;
+.sml-container button {
+  width: 95%;
   padding: 0.8rem;
   margin-top: 1.5rem;
+  font-size: 1rem;
   background-color: #9DAE8C;
   color: white;
   border: none;
@@ -460,10 +390,100 @@ nav ul li a:hover {
   font-family: 'Quicksand', sans-serif;
 }
 
+.sml-container button:focus {
+  outline: none;
+  border: 2px solid #9DAE8C;
+}
+
+/* CHECKBOX PERSONALIZADO MEJORADO */
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1rem 0 0 0.7rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.custom-control-input {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 2px solid #e1e5e9;
+  border-radius: 4px;
+  background: white;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.custom-control-input:hover {
+  border-color: #9DAE8C;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.custom-control-input:checked {
+  background: linear-gradient(135deg, #9DAE8C 0%, #9DAE8C 100%);
+  border-color: #9DAE8C;
+}
+
+.custom-control-input:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -60%) rotate(45deg);
+}
+
+.custom-control-input:focus {
+  outline: none;
+  border-color: #9DAE8C;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+.custom-control-label {
+  color: #555;
+  font-size: 0.95rem;
+  font-weight: 400;
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.custom-checkbox:hover .custom-control-label {
+  color: #9DAE8C;
+}
+
+/* Animacion suave para el check */
+.custom-control-input:checked {
+  animation: checkboxPulse 0.3s ease;
+}
+
+@keyframes checkboxPulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
 .success-message {
   color: green;
-  text-align: center;
   margin-top: 1rem;
+  text-align: center;
 }
 
 .error-message {
@@ -472,7 +492,7 @@ nav ul li a:hover {
   margin-top: 1rem;
 }
 
-
+/*LOGIN Y REGISTER*/
 
 
 .product-list {
@@ -601,14 +621,7 @@ nav ul li a:hover {
 }
 
 .add-to-cart {
-  background-color: #B4C1A1;
-  color: #FDFDF9;
-  border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-family: 'Quicksand', sans-serif;
+  font-size: 1.1rem;
 }
 
 .admin-controls {
@@ -625,51 +638,46 @@ nav ul li a:hover {
   font-size: 0.9rem;
 }
 
-.btn-add-product {
-  background-color: #B4C1A1;
-  color: white;
-  border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.btn-edit {
-  background-color: #B4C1A1;
-  color: white;
-  border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.btn-delete {
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  font-family: 'Quicksand', sans-serif;
-}
-
-.btn-reset, .btn-search {
+/* Botones de filtro y clear */
+/* Estilos para igualar el tamaño de los botones de filtro */
+.btn-filter,
+.btn-clear {
   padding: 10px 20px;
-  text-decoration: none;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
   font-family: 'Quicksand', sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  margin: 5px;
+  min-width: 120px;
+  /* Asegura un ancho mínimo igual */
+  text-align: center;
+  transition: all 0.3s ease;
 }
 
-.btn-reset {
-  background-color: #aFAFAF;
+/* Botón de aplicar filtros (verde) */
+.btn-filter {
+  background-color: #B4C1A1;
   color: #FDFDF9;
 }
 
-.btn-search {
+.btn-filter:hover {
   background-color: #9DAE8C;
+  transform: translateY(-2px);
+}
+
+/* Botón de clear (gris) */
+.btn-clear {
+  background-color: #AFAFAF;
   color: #FDFDF9;
+}
+
+.btn-clear:hover {
+  background-color: #999999;
+  transform: translateY(-2px);
 }
 
 .no-results {
@@ -790,10 +798,10 @@ nav ul li a:hover {
   padding: 2rem;
 }
 
-.cart-container {
+/* .cart-container {
   max-width: 900px;
   margin: 0 auto;
-}
+} */
 
 .cart-table {
   width: 100%;
@@ -827,14 +835,6 @@ nav ul li a:hover {
   text-align: center;
 }
 
-.btn-remove {
-  background-color: transparent;
-  border: none;
-  color: red;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
 .cart-summary {
   text-align: right;
   font-size: 1.2rem;
@@ -853,47 +853,23 @@ nav ul li a:hover {
 
 
 /*terms*/
-.terms-container {
+.mid-container {
   max-width: 800px;
   margin: 3rem auto;
-  padding: 2rem;
   background-color: #FDFDF9;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  /* font-family: "Segoe UI", sans-serif; */
-  color: #333;
-  line-height: 1.6;
-}
-
-.terms-container h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
-  color: #333;
-  text-align: center;
-}
-
-.terms-container p {
-  margin-bottom: 16px;
-  font-size: 16px;
-}
-
-
-
-/*faq*/
-.faq-container {
-  max-width: 800px;
-  margin: 3rem auto;
-  background: #FDFDF9;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Quicksand', sans-serif;
 }
 
-.faq h2 {
-  text-align: center;
-  margin-bottom: 2rem;
+.mid-container p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
+/*faq*/
 .faq {
   border-bottom: 1px solid #ddd;
   padding: 1rem 0;
@@ -933,49 +909,6 @@ nav ul li a:hover {
   justify-content: center;
   margin-top: 20px;
 }
-
-.btn-volver, .btn-guardar {
-  padding: 10px 20px;
-  text-decoration: none;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  font-family: 'Quicksand', sans-serif;
-}
-
-.btn-volver {
-  background-color: #aFAFAF;
-  color: #FDFDF9;
-}
-
-.btn-guardar {
-  background-color: #9DAE8C;
-  color: #FDFDF9;
-}
-/* .btn-volver {
-  background-color: #AFAFAF;
-  color: #FDFDF9;
-  border: none;
-  padding: 0.4rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  text-decoration: none;
-  margin-right: 1em;
-  font-size: 14px;
-}
-
-.btn-guardar {
-  background-color: #9DAE8C;
-  color: #FDFDF9;
-  border: none;
-  padding: 0.4rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 14px;
-  font-family: 'Quicksand', sans-serif;
-} */
 
 .form-container {
   max-width: 85%;
@@ -1053,6 +986,170 @@ select:focus {
   background-color: #f9f9f9;
 }
 
+/*Para profile*/
+/* Estilos para el perfil de usuario */
+
+/* Estilos para las cards */
+.card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  border: none;
+  overflow: hidden;
+}
+
+.card-header {
+  background-color: #B4C1A1;
+  color: white;
+  padding: 1rem 1.5rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin: 0;
+  border-bottom: none;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-body p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #5C5C5C;
+}
+
+.font-weight-bold {
+  font-weight: bold;
+  color: #444444;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+.ml-0 {
+  margin-left: 0;
+}
+
+.mb-5 {
+  margin-bottom: 3rem;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+/* Estilos para los botones del perfil */
+.btn-reset {
+  background-color: #AFAFAF;
+  color: #FDFDF9;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.btn-reset:hover {
+  background-color: #999999;
+  transform: translateY(-2px);
+}
+
+.btn-info {
+  background-color: #B4C1A1;
+  color: #FDFDF9;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.btn-info:hover {
+  background-color: #9DAE8C;
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: #FDFDF9;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.btn-danger:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+}
+
+.btn-warning {
+  background-color: #f39c12;
+  color: #FDFDF9;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.btn-warning:hover {
+  background-color: #e67e22;
+  transform: translateY(-2px);
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+}
+
+/* Estilos para la tabla */
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+  text-align: left;
+}
+
+.table thead th {
+  border-bottom: 2px solid #dee2e6;
+  background-color: #f8f9fa;
+  color: #495057;
+  font-weight: bold;
+}
+
+.table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.table-responsive-md {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.th-lg {
+  min-width: 120px;
+}
+
+
+
 /* Responsive para pantallas pequeñas */
 @media (max-width: 768px) {
   .menu-toggle {
@@ -1123,5 +1220,33 @@ select:focus {
   .button-container {
     flex-direction: column;
     gap: 10px;
+  }
+
+  /* Responsive para perfil */
+  .card-body {
+    padding: 1rem;
+  }
+
+  /* Responsive para perfil */
+  .table-responsive-md {
+    font-size: 0.9rem;
+  }
+
+  /* Responsive para perfil */
+  .table th,
+  .table td {
+    padding: 0.5rem;
+  }
+
+
+
+}
+
+@media (max-width: 576px) {
+
+  .table th,
+  .table td {
+    padding: 0.3rem;
+    font-size: 0.8rem;
   }
 }

@@ -1,12 +1,29 @@
-<section class="login-container">
-    <h2>Iniciar Sesión</h2>
-    <form id="loginForm">
+<section class="sml-container">
+    <h2 class="title-h2">
+        <%=title%>
+    </h2>
+    <form id="loginForm" method="POST" action="/login">
         <label for="email">Correo electrónico:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" value="<%= locals.olds && olds.email ? olds.email : '' %>">
+        <% if (locals.errors && errors.email) { %>
+        <span>
+            <%= errors.email.msg %>
+        </span>
+        <% } %>
 
         <label for="password">Contraseña:</label>
         <input type="password" id="password" name="password" required>
+        <% if (locals.errors && errors.password) { %>
+        <span>
+            <%= errors.password.msg %>
+        </span>
+        <% } %>
 
+        <div class="custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="rememberMe" id="remember-me">
+            <label class="custom-control-label" style="margin-top: 0;" for="remember-me">Recuerdame (por 30 días)</label>
+        </div>
+        
         <button type="submit">Ingresar</button>
         <p id="loginError" class="error-message"></p>
 
@@ -16,5 +33,3 @@
 
     </form>
 </section>
-
-<script src="/js/login.js"></script>

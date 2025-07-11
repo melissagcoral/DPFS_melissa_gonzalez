@@ -1,0 +1,65 @@
+<section class="mid-container">
+    <h2 class="title-h2">
+        Perfil de <%= locals.userLogged.name%>
+    </h2>
+    <div class="card mb-5">
+        <div class="card-header">
+            Mis Datos
+        </div>
+        <div class="card-body">
+            <p><span class="font-weight-bold mr-2">Nombre: </span>
+                <%= locals.userLogged.name %>
+            </p>
+            <p><span class="font-weight-bold mr-2">Apellido: </span>
+                <%= locals.userLogged.lastname %>
+            </p>
+            <p><span class="font-weight-bold mr-2">Email: </span>
+                <%= locals.userLogged.email %>
+            </p>
+            <a href="profile/edit" class="btn-info ml-0">Editar mi perfil</a>
+            <a href="/logout" class="btn-danger ml-0">Salir</a>
+        </div>
+    </div>
+    <div class="card mb-5">
+        <div class="card-header">
+            Mis Pedidos
+        </div>
+        <div class="card-body">
+            <table class="table table-responsive-md mb-0">
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">
+                            <strong>#</strong>
+                        </th>
+                        <th class="th-lg">
+                            <strong>Fecha</strong>
+                        </th>
+                        <th class="th-lg">
+                            <strong>Envío</strong>
+                        </th>
+                        <th class="th-lg">
+                            <strong>Pago</strong>
+                        </th>
+                        <th>
+                            <strong>Total</strong>
+                        </th>
+                        <th style="width: 50px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>24/05/2025 10:00</td>
+                        <td>Correo </td>
+                        <td>Efectivo</td>
+                        <td>₲1.200.000</td>
+                        <td><button class="btn-warning btn-sm"><i class="fa fa-eye"></i></button></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- <script src="/js/login.js"></script> -->

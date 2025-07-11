@@ -1,5 +1,6 @@
 <section class="cart-section">
-  <div class="cart-container">
+  <!--este div era cart container -->
+   <div class="mid-container">
     <h2 class="title-h2">
         <%= title %>
     </h2>
@@ -27,7 +28,7 @@
               </td>
               <td class="line-total">₲ <%= product.precio * product.cantidad %></td>
               <td>
-                <button class="btn-remove">✖</button>
+                <button class="btn-danger">✖</button>
               </td>
             </tr>
           <% }) %>
