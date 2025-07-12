@@ -117,7 +117,7 @@ function renderCarrito() {
       <td>₲ ${item.precio.toLocaleString()}</td>
       <td><input type="number" class="qty-input" value="${item.cantidad}" min="1" data-index="${i}" /></td>
       <td class="line-total">₲ ${(item.precio * item.cantidad).toLocaleString()}</td>
-      <td><button class="btn-remove" data-index="${i}">✖</button></td>
+      <td><button class="btn-danger" data-index="${i}">✖</button></td>
     `;
     document.querySelector('tbody').appendChild(row);
     total += item.precio * item.cantidad;
@@ -149,7 +149,7 @@ function setupQuantityChange() {
 // Eliminar productos
 // ----------------------
 function setupRemoveButtons() {
-  document.querySelectorAll('.btn-remove').forEach(btn => {
+  document.querySelectorAll('.btn-danger').forEach(btn => {
     btn.addEventListener('click', () => {
       const index = btn.dataset.index;
       let carrito = getCarrito();
