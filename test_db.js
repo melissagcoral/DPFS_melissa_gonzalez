@@ -1,5 +1,5 @@
 // test-db.js - Archivo temporal para probar la conexión
-const db = require('./database/models');
+const db = require('./src/database/models');
 
 async function testConnection() {
     try {

@@ -8,15 +8,15 @@ const expressLayouts = require('express-ejs-layouts');
 const session = require("express-session");
 const port = process.env.PORT || 3002;
 
-const sessionMiddleware = require("./middlewares/sessionMiddleware");
-const sessionTimeMiddleware = require("./middlewares/sessionTimeMiddleware");
+const sessionMiddleware = require("./src/middlewares/sessionMiddleware");
+const sessionTimeMiddleware = require("./src/middlewares/sessionTimeMiddleware");
 
 const app = express();
 
 require("dotenv").config();
 
 // Configuracion de EJS y Layouts
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'src/views'));
 app.set('view engine', 'ejs');
 
 app.use(expressLayouts); // usar layouts
@@ -41,9 +41,9 @@ app.use(sessionMiddleware);
 app.use(sessionTimeMiddleware);
 
 // Rutas
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const productsRouter = require('./routes/products');
+const indexRouter = require('./src/routes/index');
+const usersRouter = require('./src/routes/users');
+const productsRouter = require('./src/routes/products');
 
 app.use('/', indexRouter);
 app.use('/', usersRouter);
