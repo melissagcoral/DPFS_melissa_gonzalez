@@ -1,23 +1,40 @@
 <section class="mid-container">
     <h2 class="title-h2">
-        Perfil de <%= locals.userLogged.name%>
+        Perfil de <%= user.name%>
     </h2>
     <div class="card mb-5">
         <div class="card-header">
             Mis Datos
         </div>
         <div class="card-body">
-            <p><span class="font-weight-bold mr-2">Nombre: </span>
-                <%= locals.userLogged.name %>
-            </p>
-            <p><span class="font-weight-bold mr-2">Apellido: </span>
-                <%= locals.userLogged.lastname %>
-            </p>
-            <p><span class="font-weight-bold mr-2">Email: </span>
-                <%= locals.userLogged.email %>
-            </p>
-            <a href="profile/edit" class="btn-info ml-0">Editar mi perfil</a>
-            <a href="/logout" class="btn-danger ml-0">Salir</a>
+            <div><span class="font-weight-bold mr-2">Nombre: </span>
+                <%= user.name %>
+            </div>
+            <div><span class="font-weight-bold mr-2">Apellido: </span>
+                <%= user.lastname %>
+            </div>
+            <div><span class="font-weight-bold mr-2">Email: </span>
+                <%= user.email %>
+            </div>
+            <div><span class="font-weight-bold mr-2">Categoría: </span>
+                <%= user.type %>
+            </div>
+            <% if (user && user.avatar) { %>
+            <div><span class="font-weight-bold mr-2">Perfil actual: </span>
+                <img src="/images/users/<%= user.avatar%>" alt="<%= user.name %>"
+                    style="max-width: 150px; max-height: 150px; margin-bottom: 10px;margin-left: 25px;">
+            </div>
+            <% } else { %>
+                <div><span class="font-weight-bold mr-2">Perfil actual: </span>
+                <img src="/images/users/default-avatar.svg>" alt="<%= user.name %>"
+                    style="max-width: 150px; max-height: 150px; margin-bottom: 10px;margin-left: 25px;">
+                </div>    
+            <% } %>
+            <a href="/edit" class="btn-info ml-0">Editar mi perfil</a>
+            <form action="/logout" method="POST" style="display: inline;">
+                <button type="submit" class="btn-danger ml-0">Salir</button>
+            </form>
+            <!-- <a href="/logout" class="btn-danger ml-0">Salir</a> -->
         </div>
     </div>
     <div class="card mb-5">
@@ -61,5 +78,3 @@
         </div>
     </div>
 </section>
-
-<!-- <script src="/js/login.js"></script> -->

@@ -7,6 +7,9 @@ let productsController = {
             return this.search(req, res);
         }
 
+        // Obtener el ID del usuario logueado (si existe)
+        const userId = req.session.userLogged ? req.session.userLogged.id : null;
+
         Promise.all([
             db.Product.findAll({
                 include: [
@@ -18,7 +21,7 @@ let productsController = {
                 order: [['name', 'ASC']]
             }),
             db.ProductCategory.findAll(),
-            db.User.findByPk(1)
+            userId ? db.User.findByPk(userId) : Promise.resolve(null)
         ])
             .then(function ([productos, categorias, usuario]) {
                 return res.render('products/index', {

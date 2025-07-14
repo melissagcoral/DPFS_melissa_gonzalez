@@ -6,6 +6,12 @@ const Sequelize = require('sequelize');
 const process = require('process');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
+
+// Verificar carga de variables de entorno
+if (!process.env.DB_USER || !process.env.DB_PASS) {
+  throw new Error('Las variables de entorno para la base de datos no están configuradas');
+}
+
 const config = require(__dirname + '/../config/config.js')[env];
 const db = {};
 
@@ -36,6 +42,10 @@ Object.keys(db).forEach(modelName => {
     db[modelName].associate(db);
   }
 });
+
+sequelize.authenticate()
+  .then(() => console.log('✅ Conexión a la base de datos establecida correctamente'))
+  .catch(err => console.error('❌ Error de conexión a la base de datos:', err));
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

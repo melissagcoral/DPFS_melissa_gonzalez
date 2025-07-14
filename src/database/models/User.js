@@ -25,7 +25,7 @@ module.exports = function (sequelize, dataTypes) {
             allowNull: true
         },
         avatar: {
-            type: dataTypes.BLOB,
+            type: dataTypes.STRING(255),
             allowNull: true
         },
         created_at: {
