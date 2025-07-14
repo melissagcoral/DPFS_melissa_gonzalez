@@ -1,16 +1,28 @@
 <nav class="nav-bar">
-    <div class="menu-toggle" id="menu-toggle">
-        ☰
+    <div class="nav-header">
+        <a href="/" class="logo-mobile">✨ GlowUp ✨</a>
+        <div class="menu-toggle" id="menu-toggle">☰</div>
     </div>
     <ul id="nav-list">
-        <li><a href="/"><h3>✨ Glow Up ✨</h3></a></li>
+        <!-- <li><a href="/">
+                <h3>✨ Glow Up ✨</h3>
+            </a></li> -->
         <li><a href="/products">Productos</a></li>
         <li><a href="/about">Contacto</a></li>
         <!-- <li><a href="/"><i class="fa fa-search"></i></a></li> -->
         <li><a href="/cart"><i class="fa fa-cart-shopping"></i></a></li>
         <!-- <li><a href="/admin">Administrador</a></li> -->
         <li><a href="/login"><i class="fa fa-user"></i></a></li>
-        <li><a href="/logout">Cerrar sesión</a></li>
+        <!-- <li><a href="/logout">Cerrar sesión</a></li> -->
+        <li>
+            <a href="#" class="user-name">
+                <form action="/logout" method="POST" style="display: inline;">
+                    <button type="submit" class="logout-btn">
+                        Cerrar sesión
+                    </button>
+                </form>
+            </a>
+        </li>
     </ul>
 </nav>
 

@@ -4,3 +4,8 @@
 ---
 ## 🔄 Retrospectiva
 - Me di cuenta de que necesito tener un mayor dominio de Figma para poder agilizar el proceso de diseño (bocetos o wireframes). Finalmente opté por hacerlos a mano, pero mejorar mi manejo de la herramienta es una prioridad para futuros proyectos.
+
+
+---
+## 🔄 Retrospectiva
+- Me di cuenta de que necesito ser mas organizada, tengo conocimientos de desarrollo, por mala organizacion estoy un poco atrasada pero voy avanzando, me queda el detalle de perfil de usuario.

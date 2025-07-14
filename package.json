@@ -3,29 +3,34 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
-  },
-  "dependencies": {
-    "@flaticon/flaticon-uicons": "^3.3.1",
-    "bcryptjs": "^3.0.2",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "dotenv": "^17.0.1",
-    "ejs": "~2.6.1",
-    "express": "~4.16.1",
-    "express-ejs-layouts": "^2.5.1",
-    "express-session": "^1.18.1",
-    "express-validator": "^7.2.1",
-    "http-errors": "~1.6.3",
-    "method-override": "^3.0.0",
-    "morgan": "~1.9.1",
-    "multer": "^2.0.1",
-    "pg": "^8.16.2",
-    "pg-hstore": "^2.3.4",
-    "sequelize": "^6.37.7",
-    "uuid": "^11.1.0"
-  },
-  "devDependencies": {
-    "sequelize-cli": "^6.6.3"
-  }
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www",
+    "migrate": "npx sequelize db:migrate --config src/database/config/config.js --migrations-path src/database/migrations",
+    "migrate:undo": "npx sequelize db:migrate:undo --config src/database/config/config.js --migrations-path src/database/migrations",
+    "seed": "npx sequelize db:seed:all --config src/database/config/config.js --seeders-path src/database/seeders",
+    "seed:undo": "npx sequelize db:seed:undo:all --config src/database/config/config.js --seeders-path src/database/seeders"
+},
+"dependencies": {
+  "@flaticon/flaticon-uicons": "^3.3.1",
+  "bcryptjs": "^3.0.2",
+  "cookie-parser": "~1.4.4",
+  "debug": "~2.6.9",
+  "dotenv": "^17.2.0",
+  "ejs": "~2.6.1",
+  "express": "~4.16.1",
+  "express-ejs-layouts": "^2.5.1",
+  "express-session": "^1.18.1",
+  "express-validator": "^7.2.1",
+  "http-errors": "~1.6.3",
+  "method-override": "^3.0.0",
+  "morgan": "~1.9.1",
+  "multer": "^2.0.1",
+  "pg": "^8.16.2",
+  "pg-hstore": "^2.3.4",
+  "sequelize": "^6.37.7",
+  "uuid": "^11.1.0"
+},
+"devDependencies": {
+  "sequelize-cli": "^6.6.3"
+}
 }
