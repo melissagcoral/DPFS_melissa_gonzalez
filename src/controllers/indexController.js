@@ -35,7 +35,7 @@ let indexController = {
         res.render('faq', { title: 'Preguntas Frecuentes' });
     },
     cart: function (req, res) {
-        const products = JSON.parse(localStorage.getItem("products")) || [];
+        const products = req.session.cart || [];
         if (products.length === 0) {
             return res.render('cart', { title: 'Carrito', mensaje: 'No hay productos en el carrito' });
         }

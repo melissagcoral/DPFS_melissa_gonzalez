@@ -1577,7 +1577,7 @@
         addresses_url: '/account/addresses'
       },
       assets: {
-        photoswipe: '//dermaboutique.com.py/cdn/shop/t/12/assets/photoswipe.js?v=162613001030112971491744726780',
+        photoswipe: '//dermaboutique.com.py/cdn/shop/t/12/assets/photoswipe.js?v=162613000040002971491744726780',
         rellax: '//dermaboutique.com.py/cdn/shop/t/12/assets/rellax.js?v=4664090443844197101744726780',
         smoothscroll: '//dermaboutique.com.py/cdn/shop/t/12/assets/smoothscroll.js?v=37906625415260927261744726780',
       },
