@@ -20,6 +20,7 @@ if (!process.env.LOADED_ENV) {
 
 const sessionMiddleware = require("./src/middlewares/sessionMiddleware");
 const sessionTimeMiddleware = require("./src/middlewares/sessionTimeMiddleware");
+const authMiddleware = require("./src/middlewares/authMiddleware");
 
 const port = process.env.PORT || 4000;
 const app = express();
@@ -29,15 +30,15 @@ app.set('views', path.join(__dirname, 'src/views'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 // Establecer layout por defecto
-app.set('layout', './layouts/layout'); 
+app.set('layout', './layouts/layout');
 
-app.use((req, res, next) => {
-    console.log(`🔍 ${req.method} ${req.url}`);
-    if (req.method === 'POST' || req.method === 'PUT') {
-        console.log('📦 Body:', req.body);
-    }
-    next();
-});
+// app.use((req, res, next) => {
+//     console.log(`🔍 ${req.method} ${req.url}`);
+//     if (req.method === 'POST' || req.method === 'PUT') {
+//         console.log('📦 Body:', req.body);
+//     }
+//     next();
+// });
 
 // Middlewares globales
 app.use(logger('dev'));
@@ -71,6 +72,7 @@ app.locals.upload = upload;
 // esto es un middleware de tiempo de session
 app.use(sessionMiddleware);
 app.use(sessionTimeMiddleware);
+app.use(authMiddleware);
 
 // Rutas
 const indexRouter = require('./src/routes/index');
@@ -86,7 +88,7 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// manejador de error 
+// manejador de error
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
@@ -94,9 +96,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', { mensaje: err.message });
 });
-
-// app.listen(port, () => {
-//     console.log(`Servidor escuchando en http://localhost:${port}`);
-// });
 
 module.exports = app;

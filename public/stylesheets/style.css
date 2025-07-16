@@ -839,12 +839,16 @@ input[type="text"]:focus {
   background-color: #EEDDD3;
   color: #FDFDF9;
   border: 2px solid #EEDDD3;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.1rem;
 }
 
 .btn-buy:hover {
-  background-color: #B4C1A1;
+  background-color: #eeddd3;
   color: #FDFDF9;
-  border-color: #B4C1A1;
+  border-color: #EEDDD3;
+  transform: translateY(-2px);
+
 }
 
 .description-section {
