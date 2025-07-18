@@ -1,4 +1,13 @@
 <section class="product-detail" id="product-detail">
+    <nav class="breadcrumb-nav">
+        <div class="breadcrumb-pill">
+            <a href="/products" class="breadcrumb-link">
+                <i class="fas fa-arrow-left"></i>  Volver al listado</a>
+            <span class="breadcrumb-separator"> | </span>
+            <span class="breadcrumb-current"><%= product.name %></span>
+        </div>
+    </nav>
+
     <div class="detail-container">
         <div class="image-gallery">
             <img src="<%= product.image_url %>" alt="<%= product.image_alt %>" class="main-image" />

@@ -36,8 +36,9 @@ let indexController = {
     },
     cart: function (req, res) {
         const products = req.session.cart || [];
+        console.log(products)
         if (products.length === 0) {
-            return res.render('cart', { title: 'Carrito', mensaje: 'No hay productos en el carrito' });
+            return res.render('cart', { title: 'Carrito', mensaje: 'No hay productos en el carrito', cart: [] });
         }
         res.render('cart', { title: 'Carrito', cart: products });
     },

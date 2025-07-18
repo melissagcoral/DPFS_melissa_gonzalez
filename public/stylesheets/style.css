@@ -753,6 +753,42 @@ input[type="text"]:focus {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+.breadcrumb-nav {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end; /* Alinea a la derecha como en tu imagen */
+}
+
+.breadcrumb-pill {
+    border-radius: 25px;
+    padding: 8px 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.breadcrumb-link {
+    color: #AFAFAF;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.breadcrumb-link:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-separator {
+    color: #AFAFAF;
+    font-weight: bold;
+}
+
+.breadcrumb-current {
+    color: #AFAFAF;
+    font-weight: 600;
+}
+
 #quantity {
   appearance: none;
   /* Elimina el estilo nativo del navegador */
