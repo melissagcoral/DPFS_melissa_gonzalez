@@ -79,4 +79,13 @@ Puedes seguir el avance, tareas y prioridades del equipo en nuestro tablero de T
 
 ---
 
+## 📌 Cómo levantar
+
+1.  Clone el repositorio haciendo `git clone https://github.com/melissagcoral/DPFS_melissa_gonzalez.git`
+2.  Abra el proyecto en su editor de código y en la terminal sobre la carpeta del proyecto ingrese `npm install`
+3.  Una vez finalizado, podrá ejecutar el backend del proyecto en formato desarrollo usando `npm run dev` o `nodemon`
+4.  Para levantar el frontend debe abrir otra terminal y ubicarse sobre la carpeta dashboard-react, ejecutar `npm install` y finalmente `npm run dev`.
+
+---
+
 **Glow Up** — Cuidar tu piel es el primer paso para brillar 🌸
